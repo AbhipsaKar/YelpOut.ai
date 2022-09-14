@@ -1,0 +1,247 @@
+
+:root{
+    --rating: 40%;
+}
+body {
+    margin: 0;
+    padding: 0;
+    --star-size: 30px;
+    --content-margin: 60px;
+    --text-color: rgb(71, 71, 71);
+    --bottom-margin: 10px;
+}
+
+#container {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0;
+    box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1) inset 0 .125em .5em rgba(0, 0, 0, .15);
+}
+
+#map {
+    position: absolute;
+    top: 10px;
+    bottom: var(--bottom-margin);
+    left: 22%;
+    width: 36%;
+    border-radius: 4px;
+}
+.location-container{
+    position: absolute;
+    top: var(--content-margin);
+    /*width: 50%;*/
+    /*height: auto;*/
+    padding: 10px;
+    z-index: 99999;
+}
+.location-container button{
+    float: left;
+    margin: 5px;
+    cursor: pointer;
+}
+
+
+.State{
+    background-color: #0d6efd;
+    color:white;
+    border: none;
+    border-radius: 5px;
+    margin-left:;
+    padding: 10px 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+#Selection{
+    position: absolute;
+    left: 10px;
+    top: var(--content-margin);
+    width: 20%;
+    height: auto;
+    bottom: var(--bottom-margin);
+}
+
+#Rating{
+    position: absolute;
+    right: 10px;
+    top: var(--content-margin);
+    width: var(--rating);
+    height: auto;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+                "stars"
+                "Ratingchart"
+                "desc";
+    margin-bottom: 15px;
+}
+
+.shadow {
+    box-shadow: 10px -6px rgb(121, 129, 161);
+    padding: 10px;
+}
+
+.boxPanel{
+    background-color:white;
+    border: 1px solid rgb(180, 178, 178);
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#heading {
+    font-size: 25px;
+    color: #0d6efd;
+    display:inline-flex;
+    text-align: center;
+    padding-left: 15%;
+    padding-right: 5%;
+}
+
+#Ratingchart {
+    grid-area: Ratingchart;
+    height: 280px;
+    width: 480px;
+    place-self: center;
+    margin-block: 10px;
+}
+
+.stars-outer::before {
+    font-size:var(--star-size);
+    content: "\f006 \f006 \f006 \f006 \f006";
+    color: rgb(219, 216, 207);
+    border-color: rgb(153, 55, 129);
+    font-weight: 600;
+
+}
+
+.stars-inner::before {
+    font-size:var(--star-size);
+    content: "\f005 \f005 \f005 \f005 \f005";
+    color: rgba(224, 45, 45, 0.803);
+
+}
+
+.stars-inner {
+    width: 0;
+    position: absolute;
+    white-space: nowrap;
+    overflow: hidden;
+    top: 0;
+}
+
+.stars-outer {
+    display: inline-flex;
+    position: relative;
+    font-family: FontAwesome;
+    /* padding-left: 5%; */
+}
+
+.stars{
+    grid-area: stars;
+    margin: 4px;
+
+}
+
+#ratingtext {
+    font-family: FontAwesome;
+    margin: 0px;
+    font-size: 25px;
+    color:darkred;
+    white-space: nowrap;
+    display:inline-flex;
+    padding-left: 2%;
+}
+
+#desc{
+    grid-area: desc;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: small;
+    color: var(--text-color);
+}
+
+#parallelChart{
+    background-color: rgba(222, 184, 135, 0.705);
+    border: 1px solid rgb(180, 178, 178);
+    left:50;
+    width: 300;
+    height: 200;
+    position: absolute;
+    border-radius: 10px;
+}
+
+input[type='checkbox'].switch {
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+    background: #ccc;
+    border-radius: 10px;
+    transition: border-color .3s, background-color .3s;
+}
+
+input[type='checkbox'].switch::after {
+    content: '';
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 0 2px #999;
+    transition: .4s;
+    top: 2px;
+    position: absolute;
+    left: 2px;
+}
+
+input[type='checkbox'].switch:checked {
+    background: #0d6efd;
+}
+
+input[type='checkbox'].switch:checked::after {
+    content: '';
+    position: absolute;
+    left: 55%;
+    top: 2px;
+}
+
+.lineCenter {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+    color: var(--text-color);
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 12px;
+}
+.lineCenter span{
+    width: 230px;
+    text-align: left;
+    padding-right: 5px;
+}
+.submit{
+    margin-top: 10px;
+    background-color: #0d6efd;
+    color:white;
+    margin-left: 35%;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 10px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+hr {width: auto;
+    margin-left: auto;
+    margin-right: auto;
+    height: 100px;
+    background-color:rgb(26, 25, 25);
+    opacity: 0.5;
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<title>YelpOut AI</title>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/frontend.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+      <style>
+      .showHome{
+        position: relative;
+        height: auto;
+        width: auto;
+      }
+      #instructions {
+        margin-top: 20px;
+        text-align: center;
+        background: black;
+        opacity: 80%;
+        border-radius: 4px;
+      }
+      #StateSelected {
+        width:80%;
+        margin-left:10%;
+        margin-right:10%;
+      }
+
+          .background {
+              background: url("./img/background.jpeg") no-repeat center;
+              height: 100%;
+              width: 100%;
+              background-size: cover;
+              position: fixed;
+          }
+
+          .content{
+              position: relative;
+              top: 30%;
+              height: auto;
+          }
+          .content-center{
+              color: white;
+              width: 970px;
+              height: 500px;
+              padding-right: 15px;
+              padding-left: 15px;
+              margin-right: auto;
+              margin-left: auto;
+              opacity: 100%;
+          }
+      </style>
+    <!-- DeckGL Library -->
+    <script src="https://unpkg.com/deck.gl@latest/dist.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+    <!--D3.js-->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <!--ECharts-->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.1.2/dist/echarts.min.js"></script>
+
+
+</head>
+
+<body>
+
+<!-- header with logo -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+      <img src="./img/logo.png" width="88" height="30" alt="">
+    </a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+      <li class = "nav-item active"><a href="./index.html" class="nav-link px-2 link-secondary">Home</a></li>
+      <li class = "nav-item"><a href="./about.html" class="nav-link px-2 link-dark">About Us</a></li>
+      <li class = "nav-item"><a href="./documentation.html" class="nav-link px-2 link-dark">Documentation</a></li>
+      </ul>
+    </div>
+  </nav>
+<div class="background">
+</div>
+<div class="content">
+  <div class="content-center">
+
+            <div id="instructions" class = "showHome" >
+
+              <h4> Using Yelp's data, we have crafted an AI model to help you assess
+                what simple actions you can take to best improve your reviews.
+              </h4>
+              <br>
+              <h4> Follow our instructions below to get started:</h4>
+              <h5>Step 1</h5>
+              <h6> Select the state where your restaurant is located.</h6>
+              <h5>Step 2</h5>
+              <h6>Toggle the attributes on the following page to receive a
+                real-time star rating prediction.</h6>
+              <br>
+              <h4>Additional Info Provided</h4>
+              <h6> The following page will show how much positive or negative
+                influence each attribute has on a restaurant's rating.</h6>
+              <h6> View the top 100 restaurants with the selected attributes
+                on the center map. </h6>
+            </div>
+              <div id="StateSelected" class="location-container showHome">
+                <button class="State" onClick="clickStateForSelect('CO')">Colorado</button>
+                <button class="State" onClick="clickStateForSelect('OR')">Oregon</button>
+                <button class="State" onClick="clickStateForSelect('FL')">Florida</button>
+                <button class="State" onClick="clickStateForSelect('GA')">Georgia</button>
+                <button class="State" onClick="clickStateForSelect('OH')">Ohio</button>
+                <button class="State" onClick="clickStateForSelect('TX')">Texas</button>
+                <button class="State" onClick="clickStateForSelect('MA')">Massachusetts</button>
+                <button class="State" onClick="clickStateForSelect('WA')">Washington</button>
+              </div>
+          <!-- </div> -->
+      <!-- </div> -->
+  </div>
+
+
+</div>
+<div id="groupContainer">
+    <div id="container">
+        <div id="map" class="shadow boxPanel" onclick="changeFocusToMap()"></div>
+    </div>
+    <div id="Rating" class="shadow boxPanel" onclick="changeFocusToChart()">
+        <div id="stars">
+            <div id="heading">User Rating</div>
+            <div class="stars-outer">
+                <div class="stars-inner"></div>
+            </div>
+            <div id="ratingtext"></div>
+            <hr/>
+        </div>
+
+        <div id="Ratingchart" class="maximise">
+        </div>
+        <div id="desc" class="maximise">
+            <span style='font-size:20px; color:brown ; padding-left:35%;'>Negative &#8592;</span>
+            <span style='font-size:20px; color:darkgreen'>&#8594; Positive</span>
+            <hr/>
+            <p style="font-size-adjust: inherit; text-align: center;">
+                See the distribution of weights for individual features selected<br/></p>
+            <p style="font-size-adjust: inherit; text-align: center ; color: blue">
+                Click on each bar to check restaurant details on map <br/></p>
+        </div>
+    </div>
+    <div id="Selection" class="maximise shadow boxPanel">
+        <div id="heading">Features</div>
+        <form id="features" action="#" method="get">
+            <hr/>
+            <div class="lineCenter"><span>HappyHour: </span><input id="HappyHour" type="checkbox" class="switch"
+                                                                   name="HappyHour"/>
+            </div>
+            <div class="lineCenter"><span>Wi-Fi: </span><input id="Wi-Fi" type="checkbox" class="switch" name="Wi-Fi"/>
+            </div>
+            <div class="lineCenter"><span>Accept Credit Cards: </span><input id="BusinessAcceptCreditCards"
+                                                                             type="checkbox" class="switch"
+                                                                             name="BusinessAcceptCreditCards"/></div>
+            <div class="lineCenter"><span>Wheelchair Accessible: </span><input id="WheelchairAccessible" type="checkbox"
+                                                                               class="switch"
+                                                                               name="WheelchairAccessible"/>
+            </div>
+            <div class="lineCenter"><span>TakeOut: </span><input id="RestaurantsTakeOut" type="checkbox" class="switch"
+                                                                 name="RestaurantsTakeOut"/></div>
+            <div class="lineCenter"><span>Caters: </span><input id="Caters" type="checkbox" class="switch"
+                                                                name="Caters"/></div>
+            <div class="lineCenter"><span>Delivery: </span><input id="RestaurantsDelivery" type="checkbox"
+                                                                  class="switch"
+                                                                  name="RestaurantsDelivery"/>
+            </div>
+            <div class="lineCenter"><span>Alcohol:</span> <input id="Alcohol" type="checkbox" class="switch"
+                                                                 name="Alcohol"/></div>
+            <div class="lineCenter"><span>Has TV: </span><input id="HasTV" type="checkbox" class="switch" name="HasTV"/>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+</body>
+<script src="./js/map.js"></script>
+<script src="./js/rating.js"></script>
+<script src="./js/bootstrap.bundle.min.js"></script>
+
+</html>

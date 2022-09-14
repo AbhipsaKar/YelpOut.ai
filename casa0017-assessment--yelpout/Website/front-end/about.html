@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>about</title>
+    <!-- Bootstrap core CSS -->
+	<link href="./css/bootstrap.min.css" rel="stylesheet">
+  <script src="./js/map.js"></script>
+  <script src="./js/rating.js"></script>
+  <script src="./js/bootstrap.bundle.min.js"></script>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .background {
+            background: url("./img/background.jpeg") no-repeat center;
+            height: 100%;
+            width: 100%;
+            background-size: cover;
+            position: fixed;
+        }
+
+        .content{
+          margin-top: 100px;
+          text-align: center;
+          background: black;
+          opacity: 80%;
+          border-radius: 4px;
+          margin-left: 100px;
+          margin-right: 100px;
+
+
+        }
+        .content-center{
+            color: white;
+            width: 970px;
+            height: 300px;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-right: auto;
+            margin-left: auto;
+            opacity: 80%;
+        }
+    </style>
+</head>
+<body>
+<div class="background">
+    <!-- header with logo -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">
+            <img src="./img/logo.png" width="88" height="30" alt="">
+        </a>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item active"><a href="./index.html" class="nav-link px-2 link-dark">Home</a></li>
+                <li class="nav-item"><a href="./about.html" class="nav-link px-2 link-secondary">About Us</a></li>
+                <li class="nav-item"><a href="./documentation.html" class="nav-link px-2 link-dark">Documentation</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="content">
+        <div>
+            <div class="content-center">
+                    <div>
+                       <p>
+                         <h5>We understand the challenges that come with running a
+                           restaurant, and we know that it can be difficult to decide on
+                           what actionable step to take to improve the quality of your service.
+                         </h5>
+                         <br>
+                        <h5>
+                          The model we are using is a simple linear model generated
+                          by first isolating out the most actionable attributes
+                          provided in Yelp's dataset, and using them as predictors
+                          for the star ratings associated with each Yelp-listed
+                          restaurant.
+                        </h5>
+                        <br>
+                        <h5>
+                          As Connected Environments MSc students in UCL's Centre for Advanced Spatial Analysis,
+                          we hope that the model is straightforward and useful.
+                          Please get in touch if you have any questions or feedback.
+                          We are open to contributions from anyone on <a href= https://github.com/casa-ucl/casa0017-assessment--yelpout>GitHub</a>.
+                        </h5>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
